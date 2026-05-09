@@ -1,29 +1,44 @@
 """Emotion detection module"""
 
+import requests
+
 
 def emotion_detector(text_to_analyze):
     """Analyze emotion"""
 
-    if text_to_analyze.strip() == "":
-        return {
-            'anger': None,
-            'disgust': None,
-            'fear': None,
-            'joy': None,
-            'sadness': None,
-            'dominant_emotion': None
-        }
+    url = (
+        "https://sn-watson-emotion.labs.skills.network/"
+        "v1/watson.runtime.nlp.v1/NlpService/EmotionPredict"
+    )
 
-    response = {
-        'anger': 0.01,
-        'disgust': 0.02,
-        'fear': 0.01,
-        'joy': 0.95,
-        'sadness': 0.01
+    headers = {
+        "grpc-metadata-mm-model-id":
+        "emotion_aggregated-workflow_lang_en_stock"
     }
 
-    dominant_emotion = max(response, key=response.get)
+    input_json = {
+        "raw_document": {
+            "text": text_to_analyze
+        }
+    }
 
-    response['dominant_emotion'] = dominant_emotion
+    response = requests.post(
+        url,
+        json=input_json,
+        headers=headers
+    )
 
-    return response
+    formatted_response = response.json()
+
+    emotions = formatted_response[
+        "emotionPredictions"
+    ][0]["emotion"]
+
+    dominant_emotion = max(
+        emotions,
+        key=emotions.get
+    )
+
+    emotions["dominant_emotion"] = dominant_emotion
+
+    return emotions
