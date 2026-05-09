@@ -1,29 +1,19 @@
-# Emotion Detector
+# Final Project - Emotion Detection Application
 
-This project is a Flask-based Emotion Detection application developed using Python.
+This project is a Flask-based emotion detection application using Watson NLP.
 
 ## Features
+- Emotion detection using Watson NLP
+- Flask web deployment
+- Error handling for invalid input
+- Python package structure
+- REST API integration
 
-- Detects emotions from text input
-- Returns dominant emotion
-- Handles blank input errors
-- Includes unit testing
-- Uses Flask for web deployment
-- Static code analysis using pylint
+## Technologies Used
+- Python
+- Flask
+- Requests
+- Watson NLP API
 
-## Project Structure
-
-emotion-detector/
-│
-├── EmotionDetection/
-│   ├── __init__.py
-│   └── emotion_detection.py
-│
-├── server.py
-├── test_emotion_detection.py
-└── README.md
-
-## Run the Application
-
-```bash
-python3 server.py
+## Author
+Tridip Dowari
